@@ -1,9 +1,18 @@
 <script setup>
-import IntroScreen from "./components/IntroScreen.vue";
+import PokedexView from "./views/PokedexView.vue";
+import IntroScreen from "./views/IntroScreen.vue";
+import { onMounted } from "vue";
+import { ref } from "vue";
+const showPokedex = ref(false);
 </script>
 
 <template>
-  <IntroScreen />
+  <IntroScreen
+    v-show="!showPokedex"
+    :PokedexShow="() => (showPokedex = true)"
+  />
+
+  <PokedexView v-if="showPokedex" />
 </template>
 
 <style scoped>
