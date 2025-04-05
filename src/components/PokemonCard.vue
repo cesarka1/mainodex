@@ -7,6 +7,7 @@
     <div class="pokemon-image-container">
       <img :src="pokemon.image" :alt="pokemon.name" class="pokemon-image" />
     </div>
+    <p class="pokemon-description">{{ pokemon.types }}</p>
   </div>
 </template>
 
