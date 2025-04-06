@@ -1,28 +1,26 @@
-<!-- PokemonView.vue -->
 <template>
-  <h1>Mainôdex</h1>
-  <div>Filtro</div>
-  <PokemonList />
+  <div class="pokelist">
+    <HeaderList />
+    filtro
+    <PokemonList />
+  </div>
 </template>
 
 <script>
 import PokemonList from "../components/PokemonList.vue";
+import HeaderList from "../components/HeaderList.vue";
 
 export default {
   name: "PokemonView",
   components: {
     PokemonList,
+    HeaderList,
   },
 };
 </script>
 
 <style scoped>
-.pokemon-view {
-  padding: 20px;
-}
-
-h1 {
-  text-align: center;
-  margin-bottom: 30px;
+.pokelist {
+  background: #f3f4f6;
 }
 </style>

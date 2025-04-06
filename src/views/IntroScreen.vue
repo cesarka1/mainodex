@@ -34,10 +34,10 @@ const startApp = () => {
       </div>
 
       <button @click="startApp" class="start-button" :disabled="isPlaying">
-        {{ isPlaying ? "Carregando..." : "Iniciar Maniôdex" }}
+        {{ isPlaying ? "Carregando..." : "Iniciar Mainôdex" }}
       </button>
 
-      <p class="instructions">Clique para entrar na sua Maniôdex</p>
+      <p class="instructions">Clique para entrar na sua Mainôdex</p>
     </div>
 
     <audio ref="audioRef" loop>
@@ -60,7 +60,7 @@ const startApp = () => {
   width: 100%;
   background-color: rgba(255, 255, 255, 0.9);
   border-radius: 20px;
-  padding: 2rem;
+  padding: 4rem;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   text-align: center;
 }

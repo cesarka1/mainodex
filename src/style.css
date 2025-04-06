@@ -5,6 +5,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
+
   background: linear-gradient(135deg, #ff5350 0%, #e83e35 100%);
 
   font-synthesis: none;
@@ -59,9 +60,9 @@ button:focus-visible {
 }
 
 #app {
-  max-width: 1280px;
+  max-width: 1920px;
   margin: 0 auto;
-  padding: 2rem;
+  /* padding: 2rem; */
   text-align: center;
 }
 

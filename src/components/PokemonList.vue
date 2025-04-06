@@ -11,7 +11,7 @@ export default {
     return {
       pokemons: [],
       offset: 0,
-      limit: 12,
+      limit: 15,
       isLoading: false,
     };
   },
@@ -62,7 +62,7 @@ export default {
 
 <style scoped>
 .pokemon-view {
-  padding: 20px;
+  padding: 4rem;
 }
 
 .pokemon-list {
