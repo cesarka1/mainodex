@@ -1,21 +1,22 @@
 <script setup>
 import { ref } from "vue";
 
-const audioRef = ref(null);
 const isPlaying = ref(false);
+
 const props = defineProps({
   PokedexShow: Function,
+  onStartAudio: Function, // função do App.vue
 });
 
 const startApp = () => {
-  if (audioRef.value) {
-    audioRef.value.play();
-    isPlaying.value = true;
-    audioRef.value.volume = 0.2;
-    setTimeout(() => {
-      props.PokedexShow();
-    }, 1500);
-  }
+  isPlaying.value = true;
+
+  // Dispara o áudio no App.vue
+  props.onStartAudio?.();
+
+  setTimeout(() => {
+    props.PokedexShow();
+  }, 1500);
 };
 </script>
 
@@ -39,11 +40,6 @@ const startApp = () => {
 
       <p class="instructions">Clique para entrar na sua Mainôdex</p>
     </div>
-
-    <audio ref="audioRef" loop>
-      <source src="/src/assets/audios/theme.MP3" type="audio/mp3" />
-      Seu navegador não suporta áudio HTML5.
-    </audio>
   </div>
 </template>
 

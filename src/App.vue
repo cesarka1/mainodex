@@ -1,31 +1,41 @@
 <script setup>
-import PokedexView from "./views/PokedexView.vue";
 import IntroScreen from "./views/IntroScreen.vue";
-import { onMounted } from "vue";
+import PokedexView from "./views/PokedexView.vue";
 import { ref } from "vue";
+
 const showPokedex = ref(false);
+const audioRef = ref(null);
+
+const startAudio = () => {
+  if (audioRef.value) {
+    audioRef.value.volume = 0.2;
+    audioRef.value.play();
+  }
+};
+
+const toggleAudio = (isMuted) => {
+  if (audioRef.value) {
+    audioRef.value.muted = isMuted;
+  }
+};
+
+const showPokedexView = () => {
+  showPokedex.value = true;
+};
 </script>
 
 <template>
   <IntroScreen
-    v-show="!showPokedex"
-    :PokedexShow="() => (showPokedex = true)"
+    v-if="!showPokedex"
+    :PokedexShow="showPokedexView"
+    :onStartAudio="startAudio"
   />
 
-  <PokedexView v-if="showPokedex" />
-</template>
+  <div v-else>
+    <PokedexView @toggle-audio="toggleAudio" />
+  </div>
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
-</style>
+  <audio ref="audioRef" loop>
+    <source src="/src/assets/audios/theme.MP3" type="audio/mp3" />
+  </audio>
+</template>
