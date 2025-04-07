@@ -27,7 +27,7 @@ const startApp = () => {
 
       <div class="pokedex-container">
         <img
-          src="/src/assets/imgs/mainodex.png"
+          src="/public/icon.png"
           alt="maino-pokedex"
           class="logo"
           :class="{ pulse: !isPlaying }"

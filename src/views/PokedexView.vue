@@ -1,7 +1,7 @@
 <script setup>
 import PokemonList from "../components/PokemonList.vue";
 import HeaderList from "../components/HeaderList.vue";
-
+import PokemonFilter from "../components/PokemonFilter.vue";
 const emit = defineEmits(["toggle-audio"]);
 
 const handleMute = (value) => {
@@ -12,7 +12,7 @@ const handleMute = (value) => {
 <template>
   <div class="pokelist">
     <HeaderList @toggle-audio="handleMute" />
-    filtro
+    <PokemonFilter @filter-changed="handleFilterChange" />
     <PokemonList />
   </div>
 </template>

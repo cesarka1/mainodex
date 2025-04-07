@@ -1,7 +1,7 @@
 <template>
   <header class="header">
     <div class="header-logo">
-      <img src="/src/assets/imgs/mainodex.png" alt="Logo Mainodex" />
+      <img src="/public/icon.png" alt="Logo Mainodex" />
       <h1 class="header-title">Mainôdex</h1>
     </div>
 
