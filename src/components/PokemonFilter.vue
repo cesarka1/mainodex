@@ -79,8 +79,7 @@ export default {
   width: 100%;
   max-width: 80%;
   margin: 0 auto;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+  padding-top: 4rem;
   font-family: 'Roboto', Arial, sans-serif;
   /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); */
   border-radius: 8px;

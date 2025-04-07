@@ -62,7 +62,7 @@ export default {
 
 <style scoped>
 .pokemon-view {
-  padding: 4rem;
+  padding: 1rem 4rem;
 }
 
 .pokemon-list {
