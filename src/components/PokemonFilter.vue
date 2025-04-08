@@ -61,7 +61,7 @@ export default {
   methods: {
     applyFilters() {
       this.$emit("filter-changed", {
-        query: this.searchQuery,
+        query: this.searchQuery.trim().toLowerCase(),
         type: this.selectedType,
       });
     },
@@ -80,7 +80,7 @@ export default {
   max-width: 80%;
   margin: 0 auto;
   padding-top: 4rem;
-  font-family: 'Roboto', Arial, sans-serif;
+  font-family: "Roboto", Arial, sans-serif;
   /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); */
   border-radius: 8px;
   overflow: hidden;
@@ -217,11 +217,13 @@ export default {
 }
 
 /* Add a subtle transition animation */
-.search-input, .type-select {
+.search-input,
+.type-select {
   transition: box-shadow 0.3s ease, background-color 0.3s ease;
 }
 
-.search-input:hover, .type-select:hover {
+.search-input:hover,
+.type-select:hover {
   box-shadow: inset 0 0 0 1px rgba(52, 152, 219, 0.3);
 }
 
@@ -230,7 +232,7 @@ export default {
     max-width: 95%;
     margin-top: 1rem;
   }
-  
+
   .filter-container {
     flex-direction: column;
   }
@@ -239,13 +241,13 @@ export default {
     border-left: none;
     border-top: 1px solid #ddd;
   }
-  
+
   .pokeball-decoration {
     top: -10px;
     width: 30px;
     height: 30px;
   }
-  
+
   .pokeball-decoration::after {
     width: 8px;
     height: 8px;
