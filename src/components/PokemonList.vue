@@ -68,12 +68,14 @@ export default {
 
       if (!query && !type) {
         this.pokemons = [...this.loadedPokemons];
+        this.isLoading = false;
         return;
       }
 
       let matchedPokemons = [];
-      // matchedPokemons = [...this.loadedPokemons];
+      matchedPokemons = [...this.loadedPokemons];
       if (query !== "") {
+        this.isLoading = true; //Bloqueia o scroll enquanto filtra
         if (!isNaN(query)) {
           try {
             const pokemon = await getPokemonByNameOrId(query);
