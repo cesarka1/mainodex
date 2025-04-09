@@ -40,6 +40,7 @@ export default {
   width: 256px;
   cursor: pointer;
   transition: box-shadow 0.3s ease;
+  text-transform: capitalize;
 }
 
 .pokemon-card:hover {

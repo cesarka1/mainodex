@@ -58,9 +58,6 @@ export default {
         this.loadMorePokemons();
       }
     },
-    handleCardClick(pokemonName) {
-      alert(`You clicked on ${pokemonName}!`);
-    },
     async applyFilters() {
       const query = this.filters?.query?.toLowerCase() || "";
       const type = this.filters?.type?.toLowerCase() || "";
@@ -116,7 +113,7 @@ export default {
         v-for="pokemon in pokemons"
         :key="pokemon.id"
         :pokemon="pokemon"
-        @card-clicked="handleCardClick"
+        @card-clicked="$emit('card-clicked', pokemon)"
       />
     </div>
   </div>
