@@ -1,7 +1,7 @@
 <template>
   <div class="pokemon-card" @click="$emit('card-clicked', pokemon.name)">
     <div class="pokemon-header">
-      <h2 class="pokemon-name">{{ pokemon.name }}</h2>
+      <h2 class="pokemon-name">{{ formatName(pokemon.name) }}</h2>
       <span class="pokemon-id">#{{ formatId(pokemon.id) }}</span>
     </div>
     <div class="pokemon-image-container">
@@ -12,6 +12,8 @@
 </template>
 
 <script>
+import { formatId, formatName } from "../utils/pokemonUtils";
+
 export default {
   name: "PokemonCard",
   props: {
@@ -24,9 +26,8 @@ export default {
     },
   },
   methods: {
-    formatId(id) {
-      return String(id).padStart(3, "0");
-    },
+    formatName,
+    formatId,
   },
 };
 </script>

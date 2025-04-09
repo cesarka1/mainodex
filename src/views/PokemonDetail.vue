@@ -5,6 +5,7 @@
     <div class="detail-card">
       <img :src="pokemon.image" alt="pokemon" class="pokemon-image" />
       <h2 class="pokemon-name">{{ pokemon.name }}</h2>
+      <PokemonTabs :pokemon="pokemon" />
       <!-- <ul class="pokemon-types">
         <li v-for="type in pokemon.types" :key="type" class="type">
           {{ type }}
@@ -15,6 +16,8 @@
 </template>
 
 <script setup>
+import PokemonTabs from "../components/detail/PokemonTabs.vue";
+
 defineProps({
   pokemon: Object,
 });
