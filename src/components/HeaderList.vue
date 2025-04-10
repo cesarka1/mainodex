@@ -9,7 +9,7 @@
       <ul>
         <li>
           <button @click="toggleMute" class="audio-btn">
-            <span class="audio-icon">{{ isMuted ? "🔇" : "🔊" }}</span>
+            <i class="bi" :class="isMuted ? 'bi-volume-mute-fill' : 'bi-volume-up-fill'"></i>
             <span class="audio-text">{{ isMuted ? "Unmute" : "Mute" }}</span>
           </button>
         </li>
@@ -100,7 +100,7 @@ export default {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-.audio-icon {
+.audio-btn i {
   font-size: 1.2rem;
 }
 
