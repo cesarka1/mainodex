@@ -68,7 +68,7 @@ const formatTrigger = (details) => {
 <style scoped>
 .evolution-chain {
   margin-top: 2rem;
-  background-color: ##f9fafb;
+  background-color: #f9fafb;
   padding: 1.5rem;
   border-radius: 12px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);

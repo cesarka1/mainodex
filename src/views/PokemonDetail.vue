@@ -19,7 +19,7 @@
 import PokemonTabs from "../components/detail/PokemonTabs.vue";
 import { formatName } from "../utils/pokemonUtils";
 import { ref, onMounted } from "vue";
-import { getPokemonWithEvolutions } from "../services/pokemonService.js";
+import { getPokemonWithEvolutions } from "../services/PokemonService.js";
 
 const props = defineProps({
   pokemon: Object,
