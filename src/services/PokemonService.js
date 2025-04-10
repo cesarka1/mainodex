@@ -60,6 +60,7 @@ const returnData = (data) => {
     types: data.types.map((t) => t.type.name),
     sprites: data.sprites,
     moves: data.moves,
+    // game_indices: data.game_indices,
   };
 };
 
@@ -69,12 +70,9 @@ export async function getPokemonWithEvolutions(nameOrId) {
 
   const speciesRes = await fetch(pokemonData.species.url);
   const speciesData = await speciesRes.json();
-  console.log(speciesData.evolution_chain.url);
   const evolutionRes = await fetch(speciesData.evolution_chain.url);
   const evolutionData = await evolutionRes.json();
-
   const evolutionChain = await buildEvolutionChain(evolutionData.chain);
-  console.log(evolutionChain);
   return {
     ...pokemonData,
     evolution_chain: evolutionChain,
