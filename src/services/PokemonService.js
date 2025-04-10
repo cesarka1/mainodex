@@ -62,3 +62,49 @@ const returnData = (data) => {
     moves: data.moves,
   };
 };
+
+export async function getPokemonWithEvolutions(nameOrId) {
+  const pokemonRes = await fetch(`${API_URL}/${nameOrId}`);
+  const pokemonData = await pokemonRes.json();
+
+  const speciesRes = await fetch(pokemonData.species.url);
+  const speciesData = await speciesRes.json();
+  console.log(speciesData.evolution_chain.url);
+  const evolutionRes = await fetch(speciesData.evolution_chain.url);
+  const evolutionData = await evolutionRes.json();
+
+  const evolutionChain = await buildEvolutionChain(evolutionData.chain);
+  console.log(evolutionChain);
+  return {
+    ...pokemonData,
+    evolution_chain: evolutionChain,
+  };
+}
+
+async function buildEvolutionChain(chainNode) {
+  const chain = [];
+
+  async function traverse(node) {
+    const pokemonName = node.species.name;
+    const details = node.evolution_details?.[0] || null;
+
+    const pokeRes = await fetch(`${API_URL}/${pokemonName}`);
+    const pokeData = await pokeRes.json();
+
+    chain.push({
+      species_name: pokemonName,
+      image: pokeData.sprites.front_default,
+      evolves_to: node.evolves_to,
+      trigger: details?.trigger?.name || null,
+      min_level: details?.min_level || null,
+      item: details?.item?.name || null,
+    });
+
+    if (node.evolves_to.length > 0) {
+      await traverse(node.evolves_to[0]);
+    }
+  }
+
+  await traverse(chainNode);
+  return chain;
+}

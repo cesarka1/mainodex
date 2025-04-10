@@ -5,7 +5,7 @@
     <div class="detail-card">
       <img :src="pokemon.image" alt="pokemon" class="pokemon-image" />
       <h2 class="pokemon-name">{{ formatName(pokemon.name) }}</h2>
-      <PokemonTabs :pokemon="pokemon" />
+      <PokemonTabs :pokemon="fullPokemon" />
       <!-- <ul class="pokemon-types">
         <li v-for="type in pokemon.types" :key="type" class="type">
           {{ type }}
@@ -18,9 +18,20 @@
 <script setup>
 import PokemonTabs from "../components/detail/PokemonTabs.vue";
 import { formatName } from "../utils/pokemonUtils";
+import { ref, onMounted } from "vue";
+import { getPokemonWithEvolutions } from "../services/pokemonService.js";
 
-defineProps({
+const props = defineProps({
   pokemon: Object,
+});
+
+const fullPokemon = ref(props.pokemon);
+
+onMounted(async () => {
+  if (!props.pokemon.evolution_chain) {
+    fullPokemon.value = await getPokemonWithEvolutions(props.pokemon.name);
+    console.log(fullPokemon.value);
+  }
 });
 </script>
 
