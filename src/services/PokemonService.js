@@ -59,5 +59,6 @@ const returnData = (data) => {
     image: data.sprites.other["official-artwork"].front_default,
     types: data.types.map((t) => t.type.name),
     sprites: data.sprites,
+    moves: data.moves,
   };
 };
