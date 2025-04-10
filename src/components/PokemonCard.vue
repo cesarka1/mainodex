@@ -7,15 +7,21 @@
     <div class="pokemon-image-container">
       <img :src="pokemon.image" :alt="pokemon.name" class="pokemon-image" />
     </div>
-    <p class="pokemon-description">{{ pokemon.types }}</p>
+    <div class="pokemon-types">
+      <type-badge v-for="type in pokemon.types" :key="type" :type="type" />
+    </div>
   </div>
 </template>
 
 <script>
 import { formatId, formatName } from "../utils/pokemonUtils";
+import TypeBadge from "./TypeBadge.vue";
 
 export default {
   name: "PokemonCard",
+  components: {
+    TypeBadge,
+  },
   props: {
     pokemon: {
       type: Object,
@@ -35,55 +41,65 @@ export default {
 <style scoped>
 .pokemon-card {
   background-color: white;
-  border-radius: 8px;
+  border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  padding: 16px;
+  padding: 20px;
   width: 256px;
   cursor: pointer;
-  transition: box-shadow 0.3s ease;
+  transition: all 0.3s ease;
   text-transform: capitalize;
+  overflow: hidden;
 }
 
 .pokemon-card:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  transform: translateY(-4px);
 }
 
 .pokemon-header {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 8px;
+  align-items: center;
+  margin-bottom: 12px;
 }
 
 .pokemon-name {
-  font-size: 1.25rem;
-  font-weight: bold;
+  font-size: 1.35rem;
+  font-weight: 700;
   margin: 0;
-  color: black;
+  color: #2d3748;
 }
 
 .pokemon-id {
   color: #6b7280;
-  font-size: 0.875rem;
+  font-size: 0.95rem;
+  font-weight: 600;
 }
 
 .pokemon-image-container {
   display: flex;
   justify-content: center;
-  border-radius: 8px;
+  align-items: center;
+  border-radius: 10px;
   padding: 16px;
   margin-bottom: 16px;
+  background-color: #f9fafb;
 }
 
 .pokemon-image {
-  height: 128px;
-  width: 128px;
+  height: 140px;
+  width: 140px;
   object-fit: contain;
+  transition: transform 0.3s ease;
 }
 
-.pokemon-description {
-  color: #4b5563;
-  font-size: 0.875rem;
-  margin: 0;
+.pokemon-card:hover .pokemon-image {
+  transform: scale(1.05);
+}
+
+.pokemon-types {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
 }
 </style>
