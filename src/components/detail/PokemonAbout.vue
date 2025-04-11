@@ -4,13 +4,6 @@
     <div class="info-grid">
       <div class="info-card">
         <div class="info-icon">
-          <i class="bi bi-sort-numeric-up"></i>
-        </div>
-        <h3>Order</h3>
-        <p>#{{ pokemon.order }}</p>
-      </div>
-      <div class="info-card">
-        <div class="info-icon">
           <i class="bi bi-star-fill"></i>
         </div>
         <h3>Base Experience</h3>
@@ -30,16 +23,12 @@
         <h3>Weight</h3>
         <p>{{ pokemon.weight / 10 }} kg</p>
       </div>
-    </div>
-
-    <!-- Seção de tipos -->
-    <div class="section-container">
-      <h3 class="section-title">
-        <i class="bi bi-tags-fill"></i>
-        Types
-      </h3>
-      <div class="types-list">
-        <type-badge v-for="type in getPokemonTypes" :key="type" :type="type" />
+      <div class="info-card">
+        <div class="info-icon">
+          <i class="bi bi-sort-numeric-up"></i>
+        </div>
+        <h3>Order</h3>
+        <p>#{{ pokemon.order }}</p>
       </div>
     </div>
 
@@ -69,7 +58,6 @@
 
 <script setup>
 import { computed } from "vue";
-import TypeBadge from "../TypeBadge.vue";
 
 const props = defineProps({
   pokemon: Object,
@@ -81,11 +69,6 @@ const isReady = computed(() => {
     props.pokemon.game_indices &&
     props.pokemon.game_indices.length > 0
   );
-});
-
-const getPokemonTypes = computed(() => {
-  if (!props.pokemon || !props.pokemon.types) return [];
-  return props.pokemon.types.map((typeInfo) => typeInfo.type.name);
 });
 
 const formatName = (name) => {
@@ -170,13 +153,6 @@ const formatName = (name) => {
 
 .section-title i {
   color: #fc504c;
-}
-
-.types-list {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  margin-top: 0.75rem;
 }
 
 .games-counter {
