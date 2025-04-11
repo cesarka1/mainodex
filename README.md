@@ -124,17 +124,20 @@ A aplicação utiliza a [PokéAPI](https://pokeapi.co/) para fornecer:
 - Games onde o Pokémon aparece
 
 ---
-
 ## 📸 Capturas de Tela
 
 ### Tela Inicial  
-<img alt="Tela Inicial" src="https://via.placeholder.com/800x400?text=Tela+Inicial">
+
+<img src="https://github.com/user-attachments/assets/8e88cec3-d9fd-439a-a6ae-a72f9569ce72" height="400"/>
+<img src="https://github.com/user-attachments/assets/682bdec1-1ac7-4d1f-96ef-21a659c899c6" height="400"/>
 
 ### Lista de Pokémon  
-<img alt="Lista de Pokémon" src="https://via.placeholder.com/800x400?text=Lista+de+Pokémon">
+<img src="https://github.com/user-attachments/assets/5084627e-53d5-4010-8a97-3892d77213a5" height="400"/>
+<img src="https://github.com/user-attachments/assets/1b6877c9-3def-4dda-9703-044fbdda484b" height="400"/>
 
 ### Detalhes do Pokémon  
-<img alt="Detalhes do Pokémon" src="https://via.placeholder.com/800x400?text=Detalhes+do+Pokémon">
+<img src="https://github.com/user-attachments/assets/aadb5861-d5bc-4ecb-b1ea-e15f256b3112" height="400"/>
+<img src="https://github.com/user-attachments/assets/58a7fbeb-8fa2-4654-bd98-fc7d4fd48853" height="400"/>
 
 ---
 
