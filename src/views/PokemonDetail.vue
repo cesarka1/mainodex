@@ -8,20 +8,25 @@
       <div class="pokemon-header">
         <div class="pokemon-id">#{{ formatId(pokemon.id) }}</div>
         <h2 class="pokemon-name">{{ formatName(pokemon.name) }}</h2>
-        
+
         <div class="pokemon-types" v-if="pokemon.types && pokemon.types.length">
-          <type-badge 
-            v-for="type in getTypes(pokemon.types)" 
-            :key="type" 
+          <type-badge
+            v-for="type in getTypes(pokemon.types)"
+            :key="type"
             :type="type"
           />
         </div>
       </div>
-      
+
       <div class="pokemon-image-container">
-        <img :src="pokemon.image" :alt="pokemon.name" class="pokemon-image" />
+        <img
+          :src="pokemon.image"
+          :alt="pokemon.name"
+          class="pokemon-image"
+          @click="playCriePokemon"
+        />
       </div>
-      
+
       <PokemonTabs :pokemon="fullPokemon" />
     </div>
   </div>
@@ -43,13 +48,27 @@ const fullPokemon = ref(props.pokemon);
 onMounted(async () => {
   if (!props.pokemon.evolution_chain) {
     fullPokemon.value = await getPokemonWithEvolutions(props.pokemon.name);
-    console.log(fullPokemon.value);
+  }
+
+  if (fullPokemon.value?.cries?.latest) {
+    playCriePokemon();
   }
 });
 
+const playCriePokemon = () => {
+  const audioUrl = fullPokemon.value?.cries?.latest;
+  if (audioUrl) {
+    const audio = new Audio(audioUrl);
+    audio.volume = 0.4;
+    audio.play().catch((err) => {
+      console.warn("Falha ao reproduzir o som do Pokémon:", err);
+    });
+  }
+};
+
 const getTypes = (types) => {
-  if (typeof types === 'string') {
-    return types.split(',').map(type => type.trim());
+  if (typeof types === "string") {
+    return types.split(",").map((type) => type.trim());
   }
   return Array.isArray(types) ? types : [];
 };
@@ -133,6 +152,7 @@ const getTypes = (types) => {
   padding: 2rem;
   background-color: #f8f9fa;
   position: relative;
+  cursor: pointer;
 }
 
 .pokemon-image {
@@ -151,19 +171,19 @@ const getTypes = (types) => {
   .pokemon-detail {
     padding: 1rem;
   }
-  
+
   .detail-card {
     width: 95%;
   }
-  
+
   .back-btn {
     margin-left: 2vw;
   }
-  
+
   .pokemon-name {
     font-size: 1.75rem;
   }
-  
+
   .pokemon-image {
     height: 160px;
     width: 160px;
