@@ -18,6 +18,8 @@ export default {
       offset: 0,
       limit: 15,
       isLoading: false,
+      debounceTimer: null,
+      notFoundMessage: "",
     };
   },
   async mounted() {
@@ -33,7 +35,11 @@ export default {
   watch: {
     filters: {
       async handler() {
-        await this.applyFilters();
+        this.filterLocally();
+        clearTimeout(this.debounceTimer);
+        this.debounceTimer = setTimeout(() => {
+          this.applyFilters();
+        }, 1000);
       },
       deep: true,
       immediate: true,
@@ -61,7 +67,8 @@ export default {
     async applyFilters() {
       const query = this.filters?.query?.toLowerCase() || "";
       const type = this.filters?.type?.toLowerCase() || "";
-      this.pokemons = [];
+
+      let filtered = this.pokemons;
 
       if (!query && !type) {
         this.pokemons = [...this.loadedPokemons];
@@ -70,14 +77,14 @@ export default {
       }
 
       let matchedPokemons = [];
-      matchedPokemons = [...this.loadedPokemons];
       if (query !== "") {
-        this.isLoading = true; //Bloqueia o scroll enquanto filtra
+        this.isLoading = true;
         if (!isNaN(query)) {
           try {
             const pokemon = await getPokemonByNameOrId(query);
             console.log("Por ID");
-            matchedPokemons = [pokemon];
+            console.log("this.pokemon", this.pokemons);
+            if (this.pokemons.length === 0) matchedPokemons = [pokemon];
           } catch (e) {
             matchedPokemons = [];
             console.log("Erro");
@@ -94,13 +101,52 @@ export default {
           }
         }
       }
+      if (matchedPokemons[0] === null || matchedPokemons.length === 0) {
+        this.isLoading = false;
+        if (filtered.length === 0) {
+          this.notFoundMessage =
+            "Não encontrado ou termo digitado de forma incompleta!";
+        }
+        return filtered;
+      }
       if (type && matchedPokemons.length > 0) {
         matchedPokemons = matchedPokemons.filter((p) =>
           p.types.map((t) => t.toLowerCase()).includes(type)
         );
       }
-
+      console.log("matchedPokemons", matchedPokemons);
       this.pokemons = matchedPokemons;
+      this.notFoundMessage =
+        matchedPokemons.length === 0
+          ? "Não encontrado ou termo digitado de forma incompleta!"
+          : "";
+    },
+    filterLocally() {
+      const query = this.filters?.query?.toLowerCase() || "";
+      const type = this.filters?.type?.toLowerCase() || "";
+
+      let filtered = [...this.loadedPokemons];
+
+      if (query) {
+        filtered = filtered.filter(
+          (p) =>
+            p.name.toLowerCase().includes(query) ||
+            p.id.toString().includes(query)
+        );
+      }
+
+      if (type) {
+        filtered = filtered.filter((p) =>
+          p.types.map((t) => t.toLowerCase()).includes(type)
+        );
+      }
+
+      this.pokemons = filtered;
+      if (filtered.length === 0) {
+        this.notFoundMessage = "Carregando...";
+      } else {
+        this.notFoundMessage = "";
+      }
     },
   },
 };
@@ -115,6 +161,9 @@ export default {
         :pokemon="pokemon"
         @card-clicked="$emit('card-clicked', pokemon)"
       />
+      <div v-if="notFoundMessage" class="not-found-message">
+        {{ notFoundMessage }}
+      </div>
     </div>
   </div>
 </template>
@@ -130,5 +179,11 @@ export default {
   gap: 20px;
 
   justify-content: center;
+}
+.not-found-message {
+  text-align: center;
+  font-size: 1.2rem;
+  color: red;
+  margin-top: 20px;
 }
 </style>
