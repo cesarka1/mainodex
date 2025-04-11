@@ -14,6 +14,7 @@ Mainôdex é uma aplicação web desenvolvida em **Vue.js** que simula uma Poké
   - Evoluções
   - Movimentos
   - Altura, peso, experiência base e outros dados
+  - Som/Crie emitido pelo pokemon 
 - 🎵 **Música de Fundo**: Com botão para ativar/desativar.
 
 ---
