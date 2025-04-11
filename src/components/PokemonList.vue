@@ -161,10 +161,10 @@ export default {
         :pokemon="pokemon"
         @card-clicked="$emit('card-clicked', pokemon)"
       />
-      <div v-if="notFoundMessage" class="not-found-message">
-        {{ notFoundMessage }}
-      </div>
     </div>
+  </div>
+  <div v-if="notFoundMessage" class="not-found-message">
+    {{ notFoundMessage }}
   </div>
 </template>
 
@@ -184,6 +184,6 @@ export default {
   text-align: center;
   font-size: 1.2rem;
   color: red;
-  margin-top: 20px;
+  padding: 20px;
 }
 </style>
